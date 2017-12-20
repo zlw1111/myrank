@@ -1,0 +1,161 @@
+{% extends "rank/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if restaurant %}{{ restaurant.name }}{% else %}菜单{% endif %}
+{% endblock %}
+
+{% block content %}
+
+    <div id="main" class="product-list">
+        <div class="ever" ><strong>每日推荐</strong></div>
+            {% for items in myrank %}
+            <div class="item">
+               <a href="{{ items.get_absolute_url }}">
+                    <img class="my-img" src="{% if items.image %}{{ items.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+                </a></br>
+                <a href="{{ items.get_absolute_url }}">{{ items.name }}</a></br>
+            </div>
+            {% endfor %}
+            
+    </div>
+    <h4 style="font-size:20px;color:red;"><strong>今日菜单</strong></h4>
+    <h4>一号食堂</h4>
+    <table class="cart">
+        <tbody>
+            <tr>
+                <th>菜名</th>
+                <th>价格</th>
+                <th>余量</th>
+                <th>人气值</th>
+            </tr>
+            {% for product in product1 %}
+                <tr>
+                    {% if product.restaurant.name == '一号食堂' %}
+                        <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                        <td>￥{{ product.price }}</td>
+                        <td>{{ product.stock }}</td>
+                        <td>{{ product.grade }}</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+                <tr><a href="{% url 'rank:show_product' %}">详情</a></tr>
+        </tbody>
+    </table>
+        <h4>二号食堂</h4>
+        <a href="{% url 'rank:show_product' %}">详情</a>
+         <table class="cart">
+            <tbody>
+                <tr>
+                    <th>菜名</th>
+                    <th>价格</th>
+                    <th>余量</th>
+                    <th>人气值</th>
+                </tr>
+                {% for product in product2 %}
+                    <tr>
+                        {% if product.restaurant.name == '二号食堂' %}
+                            <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                            <td>￥{{ product.price }}</td>
+                            <td>{{ product.stock }}</td>
+                            <td>{{ product.grade }}</td>
+  
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <h4>三号食堂</h4>
+         <table class="cart">
+            <tbody>
+                <tr>
+                    <th>菜名</th>
+                    <th>价格</th>
+                    <th>余量</th>
+                    <th>人气值</th>
+                </tr>
+                {% for product in product3 %}
+                    <tr>
+                        {% if product.restaurant.name == '三号食堂' %}
+                            <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                            <td>￥{{ product.price }}</td>
+                            <td>{{ product.stock }}</td>
+                            <td>{{ product.grade }}</td>
+  
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                    <tr><a href="{% url 'rank:show_product' %}">详情</a></tr>
+            </tbody>
+        </table>
+        <h4>四号食堂</h4>
+         <table class="cart">
+            <tbody>
+                <tr>
+                    <th>菜名</th>
+                    <th>价格</th>
+                    <th>余量</th>
+                    <th>人气值</th>
+                </tr>
+                {% for product in product4 %}
+                    <tr>
+                        {% if product.restaurant.name == '四号食堂' %}
+                            <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                            <td>￥{{ product.price }}</td>
+                            <td>{{ product.stock }}</td>
+                            <td>{{ product.grade }}</td>
+  
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                    <tr><a href="{% url 'rank:show_product' %}">详情</a></tr>
+            </tbody>
+        </table>
+        <h4>五号食堂</h4>
+         <table class="cart">
+            <tbody>
+                <tr>
+                    <th>菜名</th>
+                    <th>价格</th>
+                    <th>余量</th>
+                    <th>人气值</th>
+                </tr>
+                {% for product in product5 %}
+                    <tr>
+                        {% if product.restaurant.name == '五号食堂' %}
+                            <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                            <td>￥{{ product.price }}</td>
+                            <td>{{ product.stock }}</td>
+                            <td>{{ product.grade }}</td>
+  
+                        {% endif %}
+                    </tr>
+                {% endfor %}
+                    <tr><a href="{% url 'rank:show_product' %}">详情</a></tr>
+            </tbody>
+        </table>
+        <h4>人气榜</h4>
+        <table class="cart">
+            <tbody>
+                <tr>
+                    <th>菜名</th>
+                    <th>价格</th>
+                    <th>人气值</th>
+                </tr>
+                {% for product in products_rank %}
+                    <tr>
+                        <td><a href="{{ product.get_absolute_url }}">{{ product.name }}</a></td>
+                        <td>￥{{ product.price }}</td>
+                        <td>{{ product.grade }}</td>
+                    </tr>
+                {% endfor %}
+                    <tr><a href="{% url 'rank:show_product' %}">详情</a></tr>
+            </tbody>
+        </table>
+        
+   
+        
+    </div>  
+{% endblock %}  
+    
+  

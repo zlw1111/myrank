@@ -1,0 +1,12 @@
+{% extends "rank/base.html" %}
+{% block title %}
+评价
+{% endblock %}
+{% block content %}
+    <h1>评价</h1>
+<form action="." method="post">
+    {{ form.as_p }}
+    <p><input type="submit" value="Place comment"></p>
+    {% csrf_token %}
+</form>
+{% endblock %}

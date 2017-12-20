@@ -1,0 +1,23 @@
+{% extends "rank/base.html" %}
+{% load static %}
+
+{% block title %}
+    {% if restaurant %}{{ restaurant.title }}{% else %}菜品{% endif %}
+{% endblock %}
+
+{% block content %}
+    <div class="product-detail">
+        <img class="my-img2" src="{% if product.image %}{{ product.image.url }}{% else %}{% static "img/no_image.png" %}{% endif %}">
+        <h1>{{ product.name }}</h1>
+        <h2><a href="{{ product.restaurant.get_absolute_url }}">({{ product.restaurant }})</a></h2>
+        <p class="price">￥{{ product.price }}</p>
+            {{ product.description|linebreaks }}
+    </div>
+
+<form action="{% url "cart:cart_add" product.id %}" method="post">
+{{ cart_product_form }}
+{% csrf_token %}
+
+<input type="submit" value="加入购物车">
+</form>
+{% endblock %}

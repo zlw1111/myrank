@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>{% block title %}我们的食堂{% endblock %}</title>
+    <link href="{% static "css/base.css" %}" rel="stylesheet">
+    
+</head>
+<header id="site-header">
+  <div id="header-search-box">
+    
+  </div>
+</header>
+<body>
+    <div id="header">
+        <a>{% for items in Myself %}
+            <h1>{{items.name}}<h1>
+            <h1>55555<h1>
+            {% if items.name == 'wy' %}
+                <img class="my-logo" src="{{ items.image.url }}">
+                
+            {% endif %}
+        {% endfor %}
+        </a>
+        <a class="logo">我们的食堂</a>
+        <form role="search" method="get" id="searchform" action="{% url "rank:search" %}">
+          {% csrf_token %}
+          <input type="search" name="q" placeholder="请输入关键字" required>
+          <button type="submit"><span class="ion-ios-search-strong">搜索</span></button>
+        </form>
+    </div>
+    
+    
+    <div id="subheader">
+        <ul id="nav">
+            <li><a href="{% url "rank:product_list" %}">首页</a></li>
+            <li><a href="{% url "rank:show_me" %}">个人中心</a></li>
+        </ul>
+        <div class="cart">
+            {% with total_items=cart|length %}
+                {% if cart|length > 0 %}
+                    您的购物车：
+                    <a href="{% url "cart:cart_detail" %}" style="color:#ffffff">
+                        共 {{ total_items }} 件,
+                        总价￥{{ cart.get_total_price }}
+                    </a>
+                {% else %}
+                    购物车里还没有东西哦！
+                {% endif %}
+            {% endwith %}
+        </div>
+    </div>
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
+</body>
+</html>

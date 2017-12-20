@@ -1,0 +1,72 @@
+{% extends "rank/base.html" %}
+{% load static %}
+
+{% block title %}
+    个人中心
+{% endblock %}
+
+{% block content %}
+    <div id="me">
+        {% for c in myself %}
+            <h1>
+                {{c.name}}
+            </h1>
+            <h2>
+            我的余额：
+            {{ c.balance }}
+            </h2>
+        {% endfor %}
+       
+            <table class="cart">
+                <thread>待评价订单</thread>
+                <tbody>
+                    <tr>
+                        <th>订单详情</th>
+                        <th>订单编号</th>
+                        <th>数量</th>
+                        <th>价格</th>
+                    </tr>
+                    {% for a in order %}
+                        {% for b in orderitems %}
+                            <tr>    
+                                {% if b.order == a %}
+                                    <td><a href="{{ b.product.get_absolute_url }}">{{ b.product.name }}</a></td>
+                                    <td>{{ b.order.id }}</td>
+                                    <td>{{ b.quantity }}</td>
+                                    <td>{{ b.price }}</td>
+                                    <td><a href="{% url "rank:comment_create" product_slug=b.product.slug order_id=b.order.id%}">去评价</a></td>
+                                {% endif %}
+                            </tr>
+                        {% endfor %}
+                    {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <div id="me">
+        <table class="cart">
+            <thead>
+                已评价订单
+            </thead>
+            <tbody>
+                <tr>
+                    <th>订单详情</th>
+                    <th>订单编号</th>
+                    <th>数量</th>
+                    <th>价格</th>
+                </tr>
+                {% for a in order2 %}
+                    {% for b in orderitems %}
+                        {% if b.order == a %}
+                            <tr>
+                                <td><a href="{{ b.product.get_absolute_url }}">{{ b.product.name }}</a></td>
+                                <td>{{ b.order.id }}</td>
+                                <td>{{ b.quantity }}</td>
+                                <td>{{ b.price }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

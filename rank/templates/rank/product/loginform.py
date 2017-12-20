@@ -1,0 +1,10 @@
+# -*- coding: utf-8 -*-
+
+from django import forms
+from .models import Myself
+
+class MyselfCreateForm(forms.ModelForm):
+    class Meta:
+        model = Myself
+        fields = ['name', 'psw']
+
